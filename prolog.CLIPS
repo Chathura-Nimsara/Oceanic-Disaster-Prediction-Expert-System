@@ -1,0 +1,255 @@
+(defrule p0
+ ?p <- (start)
+ =>
+(printout t "Before Disaster Begins?? ")
+ (assert (BeforeDisaster (read)))
+ (retract ?p))
+
+(defrule p1
+ (BeforeDisaster yes)
+ =>
+ (printout t "Dark cumulus clouds observed??")
+ (assert (DarkCumulusClouds (read))))
+
+
+(defrule p2
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ =>
+ (printout t "Frequent thunder observed??")
+ (assert (FrequentThunder (read))))
+
+(defrule p3
+ (BeforeDisaster yes)
+ (DarkCumulusClouds no)
+ =>
+ (printout t "Clod Wind observed??")
+ (assert (ClodWind (read))))
+
+(defrule p4
+ (BeforeDisaster yes)
+ (DarkCumulusClouds no)
+ (ClodWind yes)
+ =>
+ (printout t "Warm Water??")
+ (assert (WarmWater (read))))
+
+(defrule rule1
+ (BeforeDisaster yes)
+ (DarkCumulusClouds no)
+ (ClodWind yes)
+ (WarmWater yes)
+ =>
+ (printout t "Fog" crlf))
+
+(defrule rule2
+ (BeforeDisaster yes)
+ (DarkCumulusClouds no)
+ (ClodWind yes)
+ (WarmWater no)
+ =>
+ (printout t "Slushy Ocean Waves" crlf))
+
+
+(defrule rule3
+ (BeforeDisaster yes)
+ (DarkCumulusClouds no)
+ (ClodWind no)
+ =>
+ (printout t "Dry Day" crlf))
+
+(defrule p5
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ =>
+ (printout t "Rain Bigger Than 406mm??")
+ (assert (RainBigger (read))))
+
+(defrule p6
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder no)
+ =>
+ (printout t "Large earthquake observed??")
+ (assert (LargeEarthquake (read))))
+
+(defrule p7
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder no)
+ (LargeEarthquake yes)
+ =>
+ (printout t "Wind Faster Than 74mps??")
+ (assert (WindFaster74 (read))))
+
+(defrule rule4
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder no)
+ (LargeEarthquake no)
+ =>
+(printout t "Heavy Rain" crlf))
+
+(defrule rule5
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder no)
+ (LargeEarthquake yes)
+ (WindFaster74 yes)
+ =>
+ (printout t "Tsunami" crlf))
+
+(defrule rule6
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder no)
+ (LargeEarthquake yes)
+ (WindFaster74 no)
+ =>
+ (printout t "Ocean Swells" crlf))
+
+(defrule p8
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ =>
+ (printout t "Ocean swells observed??")
+ (assert (OceanSwells (read))))
+
+(defrule rule7
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger no)
+ =>
+ (printout t "Dry Thunderstorm" crlf))
+
+(defrule p9
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ (OceanSwells yes)
+ =>
+ (printout t "Wind faster than 74mps??")
+ (assert (WindFaster (read))))
+
+(defrule rule8
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ (OceanSwells no)
+ =>
+ (printout t "Heavy Rain" crlf))
+
+(defrule rule9
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ (WindFaster yes)
+ =>
+ (printout t "Hurricane" crlf))
+
+(defrule p10
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ (WindFaster no)
+ =>
+ (printout t "Wind Speed Between 39-73mps?? " )
+ (assert (WindSpeed (read))))
+
+(defrule rule10
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ (WindFaster no)
+ (WindSpeed yes)
+ =>
+ (printout t "Tropical Storm" crlf))
+
+(defrule p11
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ (WindFaster no)
+ (WindSpeed no)
+ =>
+ (printout t "Wind Still?? " )
+ (assert (WindStill (read))))
+
+(defrule rule11
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ (WindFaster no)
+ (WindSpeed no)
+ (WindStill yes)
+ =>
+ (printout t "Tornado" crlf))
+
+(defrule rule12
+ (BeforeDisaster yes)
+ (DarkCumulusClouds yes)
+ (FrequentThunder yes)
+ (RainBigger yes)
+ (WindFaster no)
+ (WindSpeed no)
+ (WindStill no)
+ =>
+ (printout t "Heavy Rain" crlf))
+
+(defrule p12
+ (BeforeDisaster no)
+ =>
+ (printout t "During Disaster??")
+ (assert (DuringDisaster (read))))
+
+(defrule rule13
+ (BeforeDisaster no)
+ (DuringDisaster yes)
+ =>
+ (printout t "Keep Everyone Safe" crlf))
+
+(defrule p13
+ (BeforeDisaster no)
+ (DuringDisaster no)
+ =>
+ (printout t "Does boat damage??")
+ (assert (DoesBoatDamage (read))))
+
+(defrule rule14
+ (BeforeDisaster no)
+ (DuringDisaster no)
+ (DoesBoatDamage no)
+ =>
+ (printout t "Sail To The NEarest Port" crlf))
+
+(defrule rule15
+ (BeforeDisaster no)
+ (DuringDisaster no)
+ (DoesBoatDamage yes)
+ =>
+ (printout t "Notify The Coast Guard" crlf))
+
+(deffacts startup
+ (start)) 
+ (reset) 
+ (run) 
+
+
+
+
+
+
+
+
+
